@@ -1,4 +1,4 @@
-# Sample AngularJS + Springboot
+# Wifeed
 
 - mvn clean install 
 - mvn spring-boot:run
