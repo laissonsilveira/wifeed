@@ -50,7 +50,7 @@ app.controller('HomeCtrl', function($scope, $http, $timeout) {
 	$scope.tempo = 7;
 	
 	var liberaAcesso = function(){
-		//window.location = "http://www.google.com/";
+		window.location = "http://www.google.com/";
 	};
 	
 	var chamaTimer = function(){
