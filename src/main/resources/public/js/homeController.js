@@ -24,7 +24,7 @@ app.controller('HomeCtrl', function($scope, $http, $timeout) {
 
 	var quantidadePropagandas = 3;
 	
-	var ultimaPropaganda = 0;
+	var ultimaPropaganda = null;
 	
 	var getRandomNumber = function(){
 		return Math.floor((Math.random() * propagandas.length) + 1) - 1;
@@ -34,14 +34,11 @@ app.controller('HomeCtrl', function($scope, $http, $timeout) {
 		
 		var numero = getRandomNumber();
 		
-		while(numero === 0){
-			numero = getRandomNumber();
-		}
-		
-		if(ultimaPropaganda !== 0)
-			while(numero === ultimaPropaganda || propagandas[numero].tipo !== propagandas[ultimaPropaganda].tipo){
+		if(ultimaPropaganda !== null){
+			while((numero === ultimaPropaganda || propagandas[numero].tipo !== propagandas[ultimaPropaganda].tipo)){
 				numero = getRandomNumber();
 			}
+		}
 		
 		$scope.propaganda = propagandas[numero];
 		
