@@ -351,7 +351,7 @@ h1, h2, h3, h4, h5, h6, figure {
 }
 @media screen and (max-width: 768px) {
   .fh5co-cover {
-    height: 600px;
+    /*height: 600px;*/
   }
 }
 .fh5co-cover .display-t,
@@ -579,8 +579,12 @@ h1, h2, h3, h4, h5, h6, figure {
 #fh5co-about,
 #fh5co-contact,
 #fh5co-footer {
-  padding: 7em 0;
-  clear: both;
+    padding: 0;
+    clear: both;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
 }
 @media screen and (max-width: 768px) {
   #fh5co-services,
@@ -591,7 +595,7 @@ h1, h2, h3, h4, h5, h6, figure {
   #fh5co-about,
   #fh5co-contact,
   #fh5co-footer {
-    padding: 3em 0;
+    padding: 0;
   }
 }
 
@@ -950,7 +954,7 @@ h1, h2, h3, h4, h5, h6, figure {
 }
 
 #fh5co-footer {
-  background: #efefef;
+  background: white;
 }
 #fh5co-footer .fh5co-footer-links {
   padding: 0;
