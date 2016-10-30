@@ -510,14 +510,12 @@ h1, h2, h3, h4, h5, h6, figure {
   padding: 0;
   color: white;
 }
-#fh5co-header .display-tc h1,
-#fh5co-counter .display-tc h1,
-.fh5co-cover .display-tc h1 {
-  margin-bottom: 20px;
-  font-size: 54px;
-  line-height: 1.2;
-  text-transform: uppercase;
-  font-weight: 300;
+#fh5co-header .display-tc h1, #fh5co-counter .display-tc h1, .fh5co-cover .display-tc h1 {
+    margin-bottom: 20px;
+    font-size: 45px;
+    line-height: 1.2;
+    text-transform: uppercase;
+    font-weight: 300;
 }
 #fh5co-header .display-tc h1 strong,
 #fh5co-counter .display-tc h1 strong,
@@ -528,7 +526,7 @@ h1, h2, h3, h4, h5, h6, figure {
   #fh5co-header .display-tc h1,
   #fh5co-counter .display-tc h1,
   .fh5co-cover .display-tc h1 {
-    font-size: 40px;
+    font-size: 20px;
   }
 }
 #fh5co-header .display-tc h2,
@@ -545,7 +543,7 @@ h1, h2, h3, h4, h5, h6, figure {
   background: #FC5185 !important;
   color: #fff;
   border: none !important;
-  font-size: 18px;
+  font-size: 15px;
 }
 #fh5co-header .display-tc .btn:hover,
 #fh5co-counter .display-tc .btn:hover,
@@ -1237,7 +1235,7 @@ h1, h2, h3, h4, h5, h6, figure {
   padding: 8px 20px !important;
 }
 .btn.btn-lg {
-  padding: 18px 36px !important;
+    padding: 8px 25px !important;
 }
 .btn:hover, .btn:active, .btn:focus {
   box-shadow: none !important;
