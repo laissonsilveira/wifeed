@@ -1,4 +1,5 @@
-<div class="fh5co-loader"></div>
+		
+<!-- 		<div class="fh5co-loader"></div> -->
 		
 		<div id="page">
 		
@@ -33,7 +34,8 @@
 									
 									<div ng-if="propaganda.tipo === 2">
 										<div class="col-md-12">
-											<img style="max-height: 500px;display: inline; margim-top: 20px;" alt="" class="img-responsive img-rounded" src="{{propaganda.imagem}}">
+											<img ng-if="tempo >= 4" style="max-height: 500px;display: inline; margim-top: 20px;" alt="" class="img-responsive img-rounded" src="{{propaganda.imagem}}">
+											<img ng-if="tempo < 4" style="max-height: 500px;display: inline; margim-top: 20px;" alt="" class="img-responsive img-rounded" src="images/anuncie.jpg">
 										</div>
 										<div class="col-md-12">
 											<a class="btn btn-primary btn-lg with-arrow timer" style="padding: 5px 13px !important; margin-top: 7px">Sua navegação será liberada em {{tempo}}</a>
@@ -46,8 +48,8 @@
 										<div class="col-md-12">
 											
 											<p ng-if="!propaganda.opcoes">
-												<a  ng-click="responde('sim')" class="btn btn-primary btn-lg with-arrow">Sim</a>
-												<a  ng-click="responde('nao')" class="btn btn-primary btn-lg with-arrow">Não</a>
+												<a  ng-click="responde('Sim')" class="btn btn-primary btn-lg with-arrow">Sim</a>
+												<a  ng-click="responde('Não')" class="btn btn-primary btn-lg with-arrow">Não</a>
 											</p>
 											
 											<span ng-if="propaganda.opcoes" ng-repeat="item in propaganda.opcoes">
