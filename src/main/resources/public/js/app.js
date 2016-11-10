@@ -7,8 +7,12 @@ app.config(function($routeProvider){
             templateUrl: '/page/home.html',
             controller: 'HomeCtrl'
         })
+        .when('/relatorio',{
+            templateUrl: '/page/relatorio.html',
+            controller: 'RelatorioCtrl'
+        })
         .otherwise(
             { redirectTo: '/home'}
         );
-	
+
 });

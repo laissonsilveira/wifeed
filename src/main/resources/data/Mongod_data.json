@@ -1,0 +1,77 @@
+db.respostas.find().pretty()
+{
+   "_id" : ObjectId("58239f4463c77532da8120d8"),
+   "_class" : "br.com.myfeed.model.Resposta",
+   "pergunta" : "Como você soube do nosso estabelecimento?",
+   "resposta" : "Redes Sociais"
+}
+{
+   "_id" : ObjectId("58239f4963c77532da8120d9"),
+   "_class" : "br.com.myfeed.model.Resposta",
+   "pergunta" : "Você gosta de música ao vivo?",
+   "resposta" : "Não"
+}
+{
+   "_id" : ObjectId("58239f4e63c77532da8120da"),
+   "_class" : "br.com.myfeed.model.Resposta",
+   "pergunta" : "Como você soube do nosso estabelecimento?",
+   "resposta" : "Redes Sociais"
+}
+
+------------------------------------------
+
+db.respostas.aggregate([
+   {
+      "$group":{
+         "_id":{
+            "per":"$pergunta",
+            "res":"$resposta"
+         },
+         "respostaCount":{
+            "$sum":1
+         }
+      }
+   },
+   {
+      "$group":{
+         "_id":"$_id.per",
+         "respostas":{
+            "$push":{
+               "resposta":"$_id.res",
+               "count":"$respostaCount"
+            }
+         },
+         "count":{
+            "$sum":"$respostaCount"
+         }
+      }
+   },
+   {
+      "$sort":{
+         "count":-1
+      }
+   }
+])
+
+{
+   "_id" : "Como você soube do nosso estabelecimento?",
+   "respostas" : [
+      {
+         "resposta" : "Redes Sociais",
+         "count" : 2
+      }
+   ],
+   "count" : 2
+}
+{
+   "_id" : "Você gosta de música ao vivo?",
+   "respostas" : [
+      {
+         "resposta" : "Não",
+         "count" : 1
+      }
+   ],
+   "count" : 1
+}
+
+
