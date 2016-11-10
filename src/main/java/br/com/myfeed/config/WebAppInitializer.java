@@ -8,14 +8,14 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 @EnableAutoConfiguration
 @ComponentScan({
-		"br.com.myfeed.controller",
-		"br.com.myfeed.service",
-		"br.com.myfeed.model"
+        "br.com.myfeed.controller",
+        "br.com.myfeed.service",
+        "br.com.myfeed.model"
 })
 public class WebAppInitializer {
 
     public static void main(String[] args) throws Exception {
-	SpringApplication.run(WebAppInitializer.class, args);
+        SpringApplication.run(WebAppInitializer.class, args);
     }
 
 //    @Bean
