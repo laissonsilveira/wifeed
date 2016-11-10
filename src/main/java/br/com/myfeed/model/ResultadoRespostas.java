@@ -14,4 +14,13 @@ public class ResultadoRespostas {
     private String _id;
     private List<RespostaCount> respostas;
 
+    public ResultadoRespostas() {}
+
+    public String get_id() {
+        return _id;
+    }
+
+    public List<RespostaCount> getRespostas() {
+        return respostas;
+    }
 }

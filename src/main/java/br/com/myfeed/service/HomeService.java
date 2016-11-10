@@ -1,13 +1,13 @@
 package br.com.myfeed.service;
 
-import br.com.myfeed.model.Resposta;
+import br.com.myfeed.model.Respostas;
 
 import java.util.List;
 
 public interface HomeService {
 
-    Resposta save(Resposta resposta);
+    Respostas save(Respostas respostas);
 
-    List<Resposta> findAll();
+    List<Respostas> findAll();
 
 }

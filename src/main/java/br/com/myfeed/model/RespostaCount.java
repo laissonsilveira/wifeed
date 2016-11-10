@@ -12,4 +12,13 @@ public class RespostaCount {
     private String resposta;
     private long count;
 
+    public RespostaCount() {}
+
+    public String getResposta() {
+        return resposta;
+    }
+
+    public long getCount() {
+        return count;
+    }
 }

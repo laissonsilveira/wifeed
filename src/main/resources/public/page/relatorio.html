@@ -24,8 +24,8 @@
                 <div class="col-md-12">
                     <div class="display-t">
                         <div style="text-align: center;" class="display-tc animate-box" data-animate-effect="fadeIn">
-                            <div>
-                                <table class="table table-hover table-responsive" ng-show="respostas.length > 0">
+                            <div ng-show="respostases.length > 0">
+                                <table class="table table-hover table-responsive">
                                     <thead style="background-color: #FC5185; color: white">
                                     <tr>
                                         <td>
@@ -37,12 +37,12 @@
                                     </tr>
                                     </thead>
                                     <tbody style="background-color: white; color: black">
-                                    <tr ng-repeat="res in respostas">
+                                    <tr ng-repeat="res in respostases">
                                         <td>
                                             {{res.pergunta}}
                                         </td>
                                         <td>
-                                            {{res.resposta}}
+                                            {{res.respostas}}
                                         </td>
                                     </tr>
                                     </tbody>

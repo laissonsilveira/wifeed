@@ -1,6 +1,6 @@
 package br.com.myfeed.controller;
 
-import br.com.myfeed.model.Resposta;
+import br.com.myfeed.model.Respostas;
 import br.com.myfeed.service.HomeServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -20,33 +20,31 @@ public class HomeController {
     private HomeServiceImpl homeService;
 
 
-    @RequestMapping(value="/salvarresposta", method= RequestMethod.POST)
-    public ResponseEntity<Object> createResposta(@RequestBody Resposta resposta, UriComponentsBuilder ucBuilder) {
+    @RequestMapping(value = "/salvarresposta", method = RequestMethod.POST)
+    public ResponseEntity<Object> createResposta(@RequestBody Respostas respostas, UriComponentsBuilder ucBuilder) {
 
-	System.out.println("Salvando resposta... " + resposta);
+        System.out.println("Salvando respostas... " + respostas);
 
-	try {
-	    homeService.save(resposta);
-	} catch (Exception e) {
-	    System.out.println("Error: " + e.toString());
-	}
+        try {
+            homeService.save(respostas);
+        } catch (Exception e) {
+            System.out.println("Error: " + e.toString());
+        }
 
-	return new ResponseEntity<Object>(resposta, HttpStatus.OK);
-
-
+        return new ResponseEntity<Object>(respostas, HttpStatus.OK);
     }
 
-    @RequestMapping(value="/listarespostas", method= RequestMethod.GET)
+    @RequestMapping(value = "/listarespostas", method = RequestMethod.GET)
     public ResponseEntity<Object> listaRespostas() {
 
-	List<Resposta> respostas = null;
-	try {
-	    respostas = homeService.findAll();
-	} catch (Exception e) {
-	    System.out.println("Error: " + e.toString());
-	}
+        List<Respostas> result = null;
+        try {
+            result = homeService.findAll();
+        } catch (Exception e) {
+            System.out.println("Error: " + e.toString());
+        }
 
-	return new ResponseEntity<Object>(respostas == null ? "Nenhuma resposta encontrada." : respostas, HttpStatus.OK);
+        return new ResponseEntity<Object>(result == null ? "Nenhuma resposta encontrada." : result, HttpStatus.OK);
 
     }
 }
