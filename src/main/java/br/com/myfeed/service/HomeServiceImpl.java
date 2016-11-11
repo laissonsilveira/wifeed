@@ -36,13 +36,6 @@ public class HomeServiceImpl implements HomeService {
     @Override
     public List<BasicDBObject> countResponses() throws Exception {
 
-//        Aggregation agg = newAggregation(
-//                group(fields().and("per", "$pergunta").and("res", "$resposta")).count().as("respostaCount"),
-//                group(fields("$_id.per")).push(new BasicDBObject("resposta", "$_id.res").append("count", "$respostaCount")).as("respostas")
-//                        .count().as("count"),
-//                sort(Sort.Direction.DESC, "count"));
-
-
         Aggregation agg = newAggregation(
                 group(fields().and("per", "$pergunta").and("res", "$resposta")).count().as("respostaCount"),
                 group(fields("$_id.per")).push(new BasicDBObject("resposta", "$_id.res").append("count", "$respostaCount"))
