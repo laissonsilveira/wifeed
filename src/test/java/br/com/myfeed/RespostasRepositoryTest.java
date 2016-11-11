@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.List;
@@ -28,6 +29,7 @@ import static org.junit.Assert.assertThat;
  **/
 @ContextConfiguration(classes = {WebAppInitializer.class})
 @RunWith(SpringJUnit4ClassRunner.class)
+@TestPropertySource(locations="classpath:application.properties")
 public class RespostasRepositoryTest {
 
     private static final String PERGUNTA = "Teste funcionou?";
