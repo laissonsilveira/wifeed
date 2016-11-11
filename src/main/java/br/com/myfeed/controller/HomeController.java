@@ -2,6 +2,7 @@ package br.com.myfeed.controller;
 
 import br.com.myfeed.model.Respostas;
 import br.com.myfeed.service.HomeServiceImpl;
+import com.mongodb.BasicDBObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -40,6 +41,20 @@ public class HomeController {
         List<Respostas> result = null;
         try {
             result = homeService.findAll();
+        } catch (Exception e) {
+            System.out.println("Error: " + e.toString());
+        }
+
+        return new ResponseEntity<Object>(result == null ? "Nenhuma resposta encontrada." : result, HttpStatus.OK);
+
+    }
+
+    @RequestMapping(value = "/countrespostas", method = RequestMethod.GET)
+    public ResponseEntity<Object> countRespostas() {
+
+        List<BasicDBObject> result = null;
+        try {
+            result = homeService.countResponses();
         } catch (Exception e) {
             System.out.println("Error: " + e.toString());
         }

@@ -1,11 +1,10 @@
 package br.com.myfeed.service;
 
 import br.com.myfeed.model.Respostas;
-import br.com.myfeed.model.ResultadoRespostas;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.GenericXmlApplicationContext;
+import com.mongodb.BasicDBObject;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
-import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.data.mongodb.core.aggregation.Aggregation;
 import org.springframework.data.mongodb.core.aggregation.AggregationResults;
 import org.springframework.stereotype.Repository;
@@ -17,14 +16,15 @@ import static org.springframework.data.mongodb.core.aggregation.Aggregation.*;
 @Repository
 public class HomeServiceImpl implements HomeService {
 
-    ApplicationContext ctx = new GenericXmlApplicationContext("SpringConfig.xml");
+    private static final org.slf4j.Logger LOGGER = LoggerFactory.getLogger(HomeServiceImpl.class);
 
-    MongoOperations mongoOperation = (MongoOperations) ctx.getBean("mongoTemplate");
+    @Autowired
+    public MongoConfig mongo;
 
     @Override
     public Respostas save(Respostas respostas) {
-        mongoOperation.save(respostas);
-        return respostas;
+	mongo.getMongoOperation().save(respostas);
+	return respostas;
     }
 
     //Convert the aggregation result into a List
@@ -34,23 +34,21 @@ public class HomeServiceImpl implements HomeService {
 
     @Override
     public List<Respostas> findAll() {
-        //db.respostas.aggregate([{"$group":{"_id":{"per":"$pergunta","res":"$resposta"},"respostaCount":{"$sum":1}}},{"$group":{"_id":"$_id.per","respostas":{"$push":{"resposta":"$_id.res","count":"$respostaCount"}},"count":{"$sum":"$respostaCount"}}},{"$sort":{"count":-1}}]).pretty()
+	return mongo.getMongoOperation().findAll(Respostas.class);
+    }
 
-        Aggregation agg = newAggregation(
-                group(
-                        fields("per", "$pergunta").and("res", "$resposta")
-                ).count().as("respostaCount"),
+    @Override
+    public List<BasicDBObject> countResponses() {
 
-                group(
-                        fields("_id", "$_id.per")
-                ).push(
-                        fields("resposta", "$_id.res").and("count", "$respostaCount")
-                ).as("respostas").sum("$respostaCount").as("count"),
+	Aggregation agg = newAggregation(
+			group(fields().and("per", "$pergunta").and("res", "$resposta")).count().as("respostaCount"),
+			group(fields("$_id.per")).push(new BasicDBObject("resposta", "$_id.res").append("count", "$respostaCount")).as("respostas")
+					.count().as("count"),
+			sort(Sort.Direction.DESC, "count"));
 
-                sort(Sort.Direction.DESC, "count"));
+	LOGGER.info(agg.toString());
 
-        AggregationResults<ResultadoRespostas> groupResults = mongoOperation.aggregate(agg, Respostas.class, ResultadoRespostas.class);
-        List<ResultadoRespostas> results = groupResults.getMappedResults();
-        return mongoOperation.findAll(Respostas.class);
+	AggregationResults<BasicDBObject> basicDBObject = mongo.getMongoOperation().aggregate(agg, "respostas", BasicDBObject.class);
+	return basicDBObject.getMappedResults();
     }
 }

@@ -5,7 +5,7 @@ import org.springframework.data.annotation.Id;
 /**
  * @author Laisson R. Silveira
  *         laisson.r.silveira@gmail.com
- *         11/08/16
+ *         08/11/16
  **/
 public class Respostas {
 
@@ -15,14 +15,15 @@ public class Respostas {
     private String pergunta;
     private String resposta;
 
-    public Respostas(String id, String pergunta, String resposta) {
-        this.id = id;
-        this.pergunta = pergunta;
-        this.resposta = resposta;
+    public Respostas(){}
+
+    public Respostas(String pergunta, String resposta) {
+	this.pergunta = pergunta;
+	this.resposta = resposta;
     }
 
     public String getId() {
-        return id;
+	return id;
     }
 
     public String getPergunta() {
