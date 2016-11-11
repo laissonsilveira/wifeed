@@ -2,6 +2,7 @@ package br.com.myfeed.service;
 
 import com.mongodb.Mongo;
 import com.mongodb.MongoClient;
+import com.mongodb.MongoCredential;
 import com.mongodb.ServerAddress;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -61,8 +62,8 @@ public class MongoConfig extends AbstractMongoConfiguration {
     @Override
     @Bean
     public Mongo mongo() throws Exception {
-        return new MongoClient(singletonList(new ServerAddress(host, port))/*,
-                singletonList(MongoCredential.createCredential(username,database, password.toCharArray()))*/);
+        return new MongoClient(singletonList(new ServerAddress(host, port)),
+                singletonList(MongoCredential.createCredential(username,database, password.toCharArray())));
     }
 
 }
