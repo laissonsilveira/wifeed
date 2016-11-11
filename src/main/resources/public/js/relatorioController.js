@@ -18,6 +18,15 @@ app.controller('RelatorioCtrl', function ($scope, $http) {
                 data: {
                     columns: _resultado,
                     type: 'pie'
+                },
+                legend: {
+                    position: 'inset',
+                    inset: {
+                        anchor: 'top-right',
+                        x: 20,
+                        y: 0,
+                        step: _resultado.length
+                    }
                 }
             });
         });
