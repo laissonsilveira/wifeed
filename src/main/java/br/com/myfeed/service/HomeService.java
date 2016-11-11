@@ -7,10 +7,10 @@ import java.util.List;
 
 public interface HomeService {
 
-    Respostas save(Respostas respostas);
+    Respostas save(Respostas respostas) throws Exception;
 
-    List<Respostas> findAll();
+    List<Respostas> findAll() throws Exception;
 
-    List<BasicDBObject> countResponses();
+    List<BasicDBObject> countResponses() throws Exception;
 
 }

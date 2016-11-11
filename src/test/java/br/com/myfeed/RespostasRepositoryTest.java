@@ -26,7 +26,7 @@ import static org.junit.Assert.assertThat;
  *         laisson.r.silveira@gmail.com
  *         08/11/16
  **/
-@ContextConfiguration(classes = { WebAppInitializer.class })
+@ContextConfiguration(classes = {WebAppInitializer.class})
 @RunWith(SpringJUnit4ClassRunner.class)
 public class RespostasRepositoryTest {
 
@@ -42,47 +42,47 @@ public class RespostasRepositoryTest {
     private Respostas resInserted;
 
     @Before
-    public void init() {
-	Respostas resInsert = new Respostas(PERGUNTA, RESPOSTA);
-	resInserted = homeService.save(resInsert);
+    public void init() throws Exception {
+        Respostas resInsert = new Respostas(PERGUNTA, RESPOSTA);
+        resInserted = homeService.save(resInsert);
     }
 
     @After
-    public void reset() {
-	if (resInserted != null) {
-	    Query query = new Query();
-	    query.addCriteria(Criteria.where("_id").is(resInserted.getId()));
-	    mongo.getMongoOperation().findAllAndRemove(query, Respostas.class);
-	}
+    public void reset() throws Exception {
+        if (resInserted != null) {
+            Query query = new Query();
+            query.addCriteria(Criteria.where("_id").is(resInserted.getId()));
+            mongo.mongoTemplate().findAllAndRemove(query, Respostas.class);
+        }
     }
 
     @Test
-    public void testSave() {
-	Respostas resByID = mongo.getMongoOperation().findById(resInserted.getId(), Respostas.class);
-	assertThat(resByID.getPergunta(), (is(equalTo(PERGUNTA))));
-	assertThat(resByID.getResposta(), (is(equalTo(RESPOSTA))));
+    public void testSave() throws Exception {
+        Respostas resByID = mongo.mongoTemplate().findById(resInserted.getId(), Respostas.class);
+        assertThat(resByID.getPergunta(), (is(equalTo(PERGUNTA))));
+        assertThat(resByID.getResposta(), (is(equalTo(RESPOSTA))));
     }
 
     @Test
-    public void testFindAll() {
-	List<Respostas> responses = homeService.findAll();
-	assertThat(responses.size(), is(greaterThan(0)));
+    public void testFindAll() throws Exception {
+        List<Respostas> responses = homeService.findAll();
+        assertThat(responses.size(), is(greaterThan(0)));
     }
 
     @Test
-    public void testCountResponses() {
-	List<BasicDBObject> responses = homeService.countResponses();
-	BasicDBObject o = null;
+    public void testCountResponses() throws Exception {
+        List<BasicDBObject> responses = homeService.countResponses();
+        BasicDBObject o = null;
 
-	for (BasicDBObject res : responses) {
-	    if (res.get("_id").equals(PERGUNTA)) {
-		BasicDBList listRes = (BasicDBList) res.get("respostas");
-		o = (BasicDBObject) listRes.get(0);
-		break;
-	    }
-	}
+        for (BasicDBObject res : responses) {
+            if (res.get("_id").equals(PERGUNTA)) {
+                BasicDBList listRes = (BasicDBList) res.get("respostas");
+                o = (BasicDBObject) listRes.get(0);
+                break;
+            }
+        }
 
-	assertThat(o.get("count"), is(equalTo(1)));
+        assertThat(o.get("count"), is(equalTo(1)));
     }
 
 }
