@@ -1,102 +1,72 @@
 app.controller('HomeCtrl', function ($scope, $http, $timeout) {
 
-    var propagandas = [{
-        tipo: 1,
-        texto: "Como você soube do nosso estabelecimento?",
-        imagem: "",
-        opcoes: [
-            "Redes Sociais",
-            "Amigos",
-            "Outros"
-        ]
-    }, {
-        tipo: 1,
-        texto: "Você gosta de música ao vivo?",
-        imagem: ""
-    }, {
-        tipo: 1,
-        texto: "Você vem sempre aqui?",
-        imagem: ""
-    }
-        
+    var quantidadePerguntas = 3;
+    
+    var perguntas = [
+    	{
+	        texto: "Como você soube do nosso estabelecimento?",
+	        opcoes: [
+	            "Redes Sociais",
+	            "Amigos",
+	            "Outros"
+	        ]
+	    }, {
+	        texto: "Você gosta de música ao vivo?"
+	    }, {
+	        texto: "Você vem sempre aqui?",
+	        opcoes: [
+	        	"Nunca",
+	        	"Todos os dias",
+	        	"As vezes"
+	        ]
+	    }
     ];
 
-    propagandas = propagandas;
-
-    var quantidadePropagandas = 3;
-
-    var ultimaPropaganda = null;
+    var perguntasJaFeitas = [];
 
     var getRandomNumber = function () {
-        return Math.floor((Math.random() * propagandas.length) + 1) - 1;
+        return Math.floor((Math.random() * perguntas.length) + 1) - 1;
     };
 
-    var trocaPropaganda = function () {
+    var trocaPergunta = function () {
 
         var numero = getRandomNumber();
-
-        if (ultimaPropaganda !== null) {
-            while ((numero === ultimaPropaganda || propagandas[numero].tipo !== propagandas[ultimaPropaganda].tipo)) {
-                numero = getRandomNumber();
-            }
+        
+        while(perguntasJaFeitas.indexOf(numero) != -1){
+        	numero = getRandomNumber();
         }
 
-        $scope.propaganda = propagandas[numero];
+        $scope.pergunta = perguntas[numero];
 
-        ultimaPropaganda = numero;
+        perguntasJaFeitas.push(numero);
 
     };
 
-    trocaPropaganda();
-
-    $scope.tempo = 7;
+    trocaPergunta();
 
     var liberaAcesso = function () {
-        window.location = "http://www.google.com/";
+        window.location = "http://www.acipsc.com.br/";
     };
-
-    var chamaTimer = function () {
-        var tick = function () {
-            if ($scope.tempo < 1) {
-                liberaAcesso();
-                return;
-            }
-            $scope.tempo = $scope.tempo - 1;
-            $timeout(tick, 1000);
-        };
-        $timeout(tick, 1000);
-    };
-
-    if ($scope.propaganda.tipo === 2) {
-        chamaTimer();
-    }
 
     $scope.responde = function (resposta, pergunta) {
 
-        var respostas = {
+        $http.post('/salvarresposta', {
             pergunta: pergunta,
             resposta: resposta
-        };
-
-        $http.post('/salvarresposta', respostas)
-            .success(function (res) {
-                console.info(res);
-            }).error(function (err) {
+        }).success(function (res) {
+            console.info(res);
+        }).error(function (err) {
             console.error(err);
         });
 
-        if (quantidadePropagandas === 1) {
+        if (quantidadePerguntas === 1) {
             liberaAcesso();
             return;
         }
 
-        trocaPropaganda();
+        trocaPergunta();
 
-        quantidadePropagandas = quantidadePropagandas - 1;
-
-        if ($scope.propaganda.tipo === 2) {
-            chamaTimer();
-        }
+        quantidadePerguntas = quantidadePerguntas - 1;
 
     };
 

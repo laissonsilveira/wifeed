@@ -1,78 +1,38 @@
-<!--<div class="fh5co-loader"></div>-->
-<div id="page">
-    <nav class="fh5co-nav">
-        <div class="top-menu">
-            <div class="container">
-                <div class="row">
-                    <div class="col-xs-2">
-                        <div id="fh5co-logo"><a href="index.html"><img src="images/simplify_logo.png"></a></div>
-                    </div>
-                    <div class="col-xs-10 text-right menu-1">
-                        <ul>
-                            <li><a href="index.html">Sobre Simplefy</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </nav>
-    <div id="fh5co-header" class="fh5co-container fh5co-cover" style="background-image:url(images/img_bg_1.jpg); padding-top: 15px"
-         data-stellar-background-ratio="0.5">
-        <div class="overlay"></div>
-        <div class="container" style="padding-top: 40px">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="display-t">
-                        <div style="text-align: center;" class="display-tc animate-box" data-animate-effect="fadeIn">
-                            <div ng-show="respostas.length > 0" class="table-respostas">
-                                <table class="table table-hover table-responsive">
-                                    <thead style="background-color: #FC5185; color: white">
-                                    <tr>
-                                        <td>
-                                            Pergunta
-                                        </td>
-                                        <td>
-                                            Resposta
-                                        </td>
-                                    </tr>
-                                    </thead>
-                                    <tbody style="background-color: white; color: black">
-                                    <tr ng-repeat="res in respostas">
-                                        <td>
-                                            {{res.pergunta}}
-                                        </td>
-                                        <td>
-                                            {{res.resposta}}
-                                        </td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                            <div id="rel"></div>
+<div id="fh5co-header" class="fh5co-container fh5co-cover" style="background-image:url(images/img_bg_1.jpg); padding-top: 15px" data-stellar-background-ratio="0.5">
+    <div class="overlay"></div>
+    <div class="container" style="padding-top: 40px">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="display-t">
+                    <div style="text-align: center;" class="display-tc animate-box" data-animate-effect="fadeIn">
+                        <div ng-show="respostas.length > 0" class="table-respostas">
+                            <table class="table table-hover table-responsive">
+                                <thead style="background-color: #FC5185; color: white">
+                                <tr>
+                                    <td>
+                                        Pergunta
+                                    </td>
+                                    <td>
+                                        Resposta
+                                    </td>
+                                </tr>
+                                </thead>
+                                <tbody style="background-color: white; color: black">
+                                <tr ng-repeat="res in respostas">
+                                    <td>
+                                        {{res.pergunta}}
+                                    </td>
+                                    <td>
+                                        {{res.resposta}}
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
                         </div>
+                        <div id="rel"></div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <footer id="fh5co-footer" role="contentinfo">
-        <div class="container">
-            <div class="row copyright">
-                <div class="col-md-12 text-center">
-                    <p>
-                        <small class="block">&copy; 2016 Wifeed. Todos os direitos reservado.</small>
-                    <ul class="fh5co-social-icons">
-                        <li><a href="#"><i class="icon-twitter"></i></a></li>
-                        <li><a href="#"><i class="icon-facebook"></i></a></li>
-                        <li><a href="#"><i class="icon-linkedin"></i></a></li>
-                    </ul>
-                    </p>
-                </div>
-            </div>
-        </div>
-    </footer>
-</div>
-
-<div class="gototop js-top">
-    <a href="#" class="js-gotop"><i class="icon-arrow-up"></i></a>
 </div>

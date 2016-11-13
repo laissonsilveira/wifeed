@@ -1,74 +1,27 @@
-<!-- 		<div class="fh5co-loader"></div> -->
-<div id="page">
-    <nav class="fh5co-nav" role="navigation">
-        <div class="top-menu">
-            <div class="container">
-                <div class="row">
-                    <div class="col-xs-2">
-                        <div id="fh5co-logo"><a href="index.html"><img src="images/simplify_logo.png"></a></div>
-                    </div>
-                    <div class="col-xs-10 text-right menu-1">
-                        <ul>
-                            <li><a href="index.html">Sobre Simplify</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </nav>
-    <header id="fh5co-header" class="fh5co-cover" role="banner" style="background-image:url(images/img_bg_1.jpg);"
-            data-stellar-background-ratio="0.5">
-        <div class="overlay"></div>
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="display-t">
-                        <div style="text-align: center;" class="display-tc animate-box" data-animate-effect="fadeIn">
+<header id="fh5co-header" class="fh5co-cover" role="banner" style="background-image:url(images/img_bg_1.jpg);"
+        data-stellar-background-ratio="0.5">
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="display-t">
+                    <div style="text-align: center;" class="display-tc animate-box" data-animate-effect="fadeIn">
 
-                            <div ng-if="propaganda.tipo === 2">
-                                <div class="col-md-12">
-                                    <img ng-if="tempo >= 4" style="max-height: 500px;display: inline; margim-top: 20px;" alt=""
-                                         class="img-responsive img-rounded" src="{{propaganda.imagem}}">
-                                    <img ng-if="tempo < 4" style="max-height: 500px;display: inline; margim-top: 20px;" alt=""
-                                         class="img-responsive img-rounded" src="images/anuncie.jpg">
-                                </div>
-                                <div class="col-md-12">
-                                    <a class="btn btn-primary btn-lg with-arrow timer" style="padding: 5px 13px !important; margin-top: 7px">Sua
-                                        navegação será liberada em {{tempo}}</a>
-                                </div>
-                            </div>
-
-                            <!-- Perguntas -->
-                            <div ng-if="propaganda.tipo === 1">
-                                <h1>{{propaganda.texto}}</h1>
-                                <div class="col-md-12">
-                                    <p ng-if="!propaganda.opcoes">
-                                        <a ng-click="responde('Sim', propaganda.texto)" class="btn btn-primary btn-lg with-arrow">Sim</a>
-                                        <a ng-click="responde('Não', propaganda.texto)" class="btn btn-primary btn-lg with-arrow">Não</a>
-                                    </p>
-                                    <span ng-if="propaganda.opcoes" ng-repeat="item in propaganda.opcoes">
-												<a ng-click="responde(item, propaganda.texto)" class="btn btn-primary btn-block btn-lg with-arrow">{{item}}</a>
-											</span>
-                                </div>
-                            </div>
-                        </div>
+                        <!-- Perguntas -->
+                         <h1>{{pergunta.texto}}</h1>
+                         <div class="col-md-12">
+                             <p ng-if="!pergunta.opcoes">
+                                 <a ng-click="responde('Sim', pergunta.texto)" class="btn btn-primary btn-lg with-arrow">Sim</a>
+                                 <a ng-click="responde('Não', pergunta.texto)" class="btn btn-primary btn-lg with-arrow">Não</a>
+                             </p>
+                             <span ng-if="pergunta.opcoes" ng-repeat="item in pergunta.opcoes">
+					<a ng-click="responde(item, pergunta.texto)" class="btn btn-primary btn-block btn-lg with-arrow">{{item}}</a>
+				</span>
+                         </div>
+                        
                     </div>
                 </div>
             </div>
         </div>
-    </header>
-    <footer id="fh5co-footer" role="contentinfo">
-        <div class="container">
-            <div class="row copyright">
-                <div class="col-md-12 text-center">
-                    <span class="block" style="font-size: 60%;">&copy; 2016 Simplify. Todos os direitos reservado.</span>
-                    <ul class="fh5co-social-icons">
-                        <li><a href="https://www.fb.com/simplifystartup" target="_blank"><i class="icon-twitter"></i></a></li>
-                        <li><a href="https://www.fb.com/simplifystartup" target="_blank"><i class="icon-facebook"></i></a></li>
-                        <li><a href="https://www.fb.com/simplifystartup" target="_blank"><i class="icon-linkedin"></i></a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </footer>
-</div>
+    </div>
+</header>
