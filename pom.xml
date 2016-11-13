@@ -6,7 +6,7 @@
 
   	<modelVersion>4.0.0</modelVersion>
   	<groupId>br.com.simplify</groupId>
-  	<artifactId>angular-springboot-project</artifactId>
+  	<artifactId>simplify</artifactId>
   	<version>0.0.1-SNAPSHOT</version>
 	
 	<parent>
@@ -111,6 +111,7 @@
             <url>https://repo.spring.io/libs-release</url>
         </repository>
     </repositories>
+    
     <pluginRepositories>
         <pluginRepository>
             <id>spring-releases</id>
@@ -118,6 +119,5 @@
             <url>https://repo.spring.io/libs-release</url>
         </pluginRepository>
     </pluginRepositories>
-
 
 </project>
