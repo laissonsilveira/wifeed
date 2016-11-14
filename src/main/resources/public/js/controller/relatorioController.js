@@ -1,11 +1,29 @@
 app.controller('RelatorioCtrl', function ($scope, $http) {
 
     $scope.respostas = [];
+    $scope.menuItems = ['Perguntas / Respostas', 'Gráficos'];
+    $scope.activeMenu = $scope.menuItems[0];
+    $scope.isChart = false;
+
+    $scope.setActive = function(menuItem) {
+        $scope.activeMenu = menuItem;
+        $scope.isChart = menuItem == $scope.menuItems[1];
+    };
+
+    $scope.updateChart = function () {
+      countResponses();
+    };
 
     function montarRelatorio(data) {
+        $('#rel').empty();
+
         $.each(data, function (index, res) {
-            // $.each(data, function(index, obj) {
-            $("#rel").append("<label style='color: white;padding-right: 25px'>" + res._id + "<div id='rel_" + index + "'></div></label>");
+            var html = "<label style='color: gray;padding-right: 25px' class='text-center'>"
+                + res._id +
+                "<div id='rel_" + index + "'></div>" +
+                "</label>";
+
+            $("#rel").append(html);
 
             var _resultado = [];
 
@@ -18,15 +36,10 @@ app.controller('RelatorioCtrl', function ($scope, $http) {
                 data: {
                     columns: _resultado,
                     type: 'pie'
-                // },
-                // legend: {
-                //     position: 'inset',
-                //     inset: {
-                //         anchor: 'top-right',
-                //         x: 20,
-                //         y: 0,
-                //         step: _resultado.length
-                //     }
+                },
+                size: {
+                    width: 250,
+                    height: 250
                 }
             });
         });
