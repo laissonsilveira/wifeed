@@ -15,10 +15,6 @@ app.controller('RelatorioCtrl', function ($scope, $http) {
         $scope.activeMenu = menuItem;
     };
 
-    $scope.updateChart = function () {
-        countResponses();
-    };
-
     function makeChartConnections() {
         c3.generate({
             bindto: $('#connect')[0],
@@ -152,8 +148,14 @@ app.controller('RelatorioCtrl', function ($scope, $http) {
             });
     }
 
-    findAllRes();
-    countResponses();
-    makeChartConnections();
-    makeChartUsers();
+    $scope.updateChart = function () {
+        countResponses();
+    };
+
+    $scope.init = function () {
+        findAllRes();
+        countResponses();
+        makeChartConnections();
+        makeChartUsers();
+    }
 });
