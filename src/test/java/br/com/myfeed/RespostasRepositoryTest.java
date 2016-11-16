@@ -17,6 +17,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import java.util.Date;
 import java.util.List;
 
 import static org.hamcrest.Matchers.*;
@@ -45,7 +46,7 @@ public class RespostasRepositoryTest {
 
     @Before
     public void init() throws Exception {
-        Respostas resInsert = new Respostas(PERGUNTA, RESPOSTA);
+        Respostas resInsert = new Respostas(PERGUNTA, RESPOSTA, new Date());
         resInserted = homeService.save(resInsert);
     }
 

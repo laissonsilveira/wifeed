@@ -15,25 +15,116 @@
                             Associação Empresarial de Palhoça
                         </div>
                         <div class="profile-usertitle-job">
-                            <a href="http://www.acipsc.com.br/" target="_blank" >ACIP</a>
+                            <a href="http://www.acipsc.com.br/" target="_blank">ACIP</a>
                         </div>
                     </div>
                     <!-- END SIDEBAR USER TITLE -->
                     <!-- SIDEBAR MENU -->
                     <div class="profile-usermenu">
                         <ul class="nav">
-                            <li ng-repeat='item in menuItems' ng-class="{active : activeMenu === item}">
-                                <a ng-click="setActive(item)" href="">{{ item }}</a>
+                            <li ng-repeat='item in menuItems' ng-class="{active : activeMenu.id === item.id}">
+                                <a ng-click="setActive(item)" href="">{{ item.name }}</a>
                             </li>
                         </ul>
                     </div>
                     <!-- END MENU -->
                 </div>
             </div>
-            <div class="col-md-9">
-                <div class="report-content" ng-hide="isChart">
+            <!--RESULTADO-->
+            <div class="col-md-9" ng-show="activeMenu.id === 0">
+                <div class="report-content chart-content">
+                    <div class="report-content-title">
+                        {{activeMenu.name}}
+                    </div>
+                    <a ng-click="updateChart()" class="btn btn-primary btn-lg pull-right">Atualizar</a>
+                    <div id="rel"></div>
+                </div>
+            </div>
+            <!--PERGUNTAS-->
+            <div class="col-md-9" ng-show="activeMenu.id === 1">
+                <div class="report-content">
+                    <div class="report-content-title">
+                        {{activeMenu.name}}
+                    </div>
+                    <form>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div id="pergunta" class="form-group">
+                                    <label for="pergunta">Pergunta: </label>
+                                    <input type="text" class="form-control" value="Você vem sempre aqui?">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-8">
+                                <div id="resposta" class="form-inline">
+                                    <label for="pergunta">Opção: </label>
+                                    <input type="text" class="form-control" value="Sim">
+                                    <button class="btn btn-primary btn-lg" type="submit">Adicionar</button>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div id="respostas" class="form-group">
+                                    <table class="table table-hover table-responsive">
+                                        <thead style="background-color: #6cb6e5; color: white">
+                                        <tr>
+                                            <td style="text-align: center">
+                                                Opções
+                                            </td>
+                                        </tr>
+                                        </thead>
+                                        <tbody style="background-color: white">
+                                        <tr>
+                                            <td style="text-align: center">
+                                                Não
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="text-center">
+                                    <button class="btn btn-primary btn-lg">Salvar</button>
+                                    <button class="btn btn-primary btn-lg">Cancelar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    <hr>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <table class="table table-hover table-responsive">
+                                <thead style="background-color: #6cb6e5; color: white">
+                                <tr>
+                                    <td>
+                                        Perguntas
+                                    </td>
+                                </tr>
+                                </thead>
+                                <tbody style="background-color: white">
+                                <tr ng-repeat="res in result">
+                                    <td>
+                                        {{res._id}}
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--RESPOSTAS-->
+            <div class="col-md-9" ng-show="activeMenu.id === 2">
+                <div class="report-content">
+                    <div class="report-content-title">
+                        {{activeMenu.name}}
+                    </div>
                     <table class="table table-hover table-responsive">
-                        <thead style="background-color: #FC5185; color: white">
+                        <thead style="background-color: #6cb6e5; color: white">
                         <tr>
                             <td>
                                 Pergunta
@@ -41,9 +132,12 @@
                             <td>
                                 Resposta
                             </td>
+                            <td>
+                                Data
+                            </td>
                         </tr>
                         </thead>
-                        <tbody style="background-color: white; color: black">
+                        <tbody style="background-color: white">
                         <tr ng-repeat="res in respostas">
                             <td>
                                 {{res.pergunta}}
@@ -51,15 +145,168 @@
                             <td>
                                 {{res.resposta}}
                             </td>
+                            <td>
+                                {{res.data | date:'M/d/yy H:mm'}}
+                            </td>
                         </tr>
                         </tbody>
                     </table>
                 </div>
             </div>
-            <div class="col-md-9">
-                <div class="report-content chart-content" ng-show="isChart">
-                    <a ng-click="updateChart()" class="btn btn-primary btn-lg pull-right">Atualizar</a>
-                    <div id="rel"></div>
+            <!--CONEXOES-->
+            <div class="col-md-9" ng-show="activeMenu.id === 3">
+                <div class="report-content">
+                    <div class="report-content-title">
+                        {{activeMenu.name}}
+                    </div>
+                    <a class="btn btn-primary btn-lg pull-right">Atualizar</a>
+                    <div>
+                        <label>Quantidade de Conexões por Data</label>
+                        <div id="connect"></div>
+                    </div>
+                    <hr>
+                    <div>
+                        <div class="row">
+                            <div class="col-md-10">
+                                <label>Quantidade de Conexões por Usuários</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-5">
+                                <div id="chart_user_05_10_15"></div>
+                            </div>
+                            <div class="col-md-5">
+                                <div id="chart_user_15_20_25"></div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-5">
+                                <div id="chart_user_25_30_35"></div>
+                            </div>
+                            <div class="col-md-5">
+                                <div id="chart_user_35_40_45"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--PROMOCOES-->
+            <div class="col-md-9" ng-show="activeMenu.id === 4">
+                <div class="report-content">
+                    <div class="report-content-title">
+                        {{activeMenu.name}}
+                    </div>
+                    <form>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="pergunta">Nome da promoção: </label>
+                                    <input type="text" class="form-control" value="Voltou ganhou!">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="regra">Regra: </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <select class="form-control" id="regra">
+                                        <option>Intervalo de dias menor/igual</option>
+                                        <option>Vezes que visitou o estabelecimento</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <input type="number" class="form-control" value="5">
+                            </div>
+                            <div class="col-md-4">
+                                <button class="btn btn-primary" type="submit">Adicionar</button>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <table class="table table-hover table-responsive">
+                                        <thead style="background-color: #6cb6e5; color: white">
+                                        <tr>
+                                            <td>
+                                                Regra
+                                            </td>
+                                            <td style="text-align: center">
+                                                Qtdade
+                                            </td>
+                                        </tr>
+                                        </thead>
+                                        <tbody style="background-color: white">
+                                        <tr>
+                                            <td>
+                                                Intervalo de dias menor/igual
+                                            </td>
+                                            <td style="text-align: center">
+                                                7
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Imagem: </label>
+                                    <input type="file" class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Validade: </label>
+                                    <input type="date" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="text-center">
+                                    <button class="btn btn-primary btn-lg">Salvar</button>
+                                    <button class="btn btn-primary btn-lg">Cancelar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    <hr>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <table class="table table-hover table-responsive">
+                                <thead style="background-color: #6cb6e5; color: white">
+                                <tr>
+                                    <td>
+                                        Promoções
+                                    </td>
+                                    <td>
+                                        Validade
+                                    </td>
+                                </tr>
+                                </thead>
+                                <tbody style="background-color: white">
+                                <tr>
+                                    <td>
+                                        Valendo 1 chopp!
+                                    </td>
+                                    <td>
+                                        15 Dez 2015 23:59
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
